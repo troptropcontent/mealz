@@ -1,0 +1,12 @@
+
+<div class="w-full p-10 bg-white rounded-md">
+    <%= form_with model: event, class: "flex flex-col" do |form| %>
+        <%= form.label :name, "Nom de l'évenement" %>
+        <%= form.text_field :name %>
+        <%= form.label :start_on, "Date de début", class: 'mt-4' %>
+        <%= form.date_field :start_on %>
+        <%= form.label :end_on, "Date de fin", class: 'mt-4' %>
+        <%= form.date_field :end_on %>
+        <%= form.submit 'Créer un événement', class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+</div>
