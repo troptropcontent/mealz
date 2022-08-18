@@ -1,4 +1,9 @@
-<div>
-  <h1 class="font-bold text-4xl">Events#index</h1>
-  <p>Find me in app/views/events/index.html.erb</p>
-</div>
+<% if @events.empty? %>
+  <%= render 'ui/simple_card', content: "Vous ne faites partie d'aucuns evenement pour le moment. Veuillez en créer un ou en rejoindre un." %>
+<% else %>
+  <div>
+    <% @events.each do |event| %>
+      <%= render 'ui/simple_card', content: event.name %>
+    <% end %>
+  </div>
+<% end %>
