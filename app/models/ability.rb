@@ -7,7 +7,7 @@ class Ability
     # Define abilities for the user here. For example:
     #
     return unless user.present?
-    can [:index, :new], Event, guests: { user_id: user.id }
+    can [:index, :new], Event, guests: { user_id: user.id }, deleted: false
     can [:new, :create, :destroy], Event
 
     #
