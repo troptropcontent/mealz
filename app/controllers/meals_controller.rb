@@ -5,6 +5,9 @@ class MealsController < ApplicationController
         redirect_to event_path(@meal.event)
     end
 
+    def show
+    end
+
     def new 
         @event = Event.find(params[:event_id])
     end

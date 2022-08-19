@@ -1,0 +1,15 @@
+<div class="flex flex-col w-full">
+    <%= render(
+            'ui/simple_card', 
+            content: @meal.kind.capitalize + " du " + french_date(@meal.scheduled_on), 
+            subcontent: link_to(event_path(@meal.event)){inline_svg_tag 'icons/x.svg'}
+        )  
+    %>
+    <% Course.kinds.keys.each do |kind| %>
+       <%= render(
+            'ui/simple_card', 
+            content: kind.capitalize, 
+            subcontent: nil
+        )  %>
+    <% end %>
+</div>

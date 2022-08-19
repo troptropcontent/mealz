@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :new, :create, :destroy, :show] do
     resources :meals, only: [:new]
   end
-  resources :meals, only: [:destroy, :create]
+  resources :meals, only: [:destroy, :create, :show]
 end
