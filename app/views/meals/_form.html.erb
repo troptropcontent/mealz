@@ -1,0 +1,11 @@
+
+<div class="w-full p-10 bg-white rounded-md mt-4">
+    <%= form_with model: meal, class: "flex flex-col" do |form| %>
+        <%= form.label :scheduled_on, "Jour" %>
+        <%= form.select :scheduled_on, @event.days.map{|day| [french_date(day), day]}, {}, class: "mb-2" %>
+        <%= form.label :kind, "Type" %>
+        <%= form.select :kind, Meal.kinds.keys %>
+        <%= form.hidden_field :event_id, value: @event.id %>
+        <%= form.submit 'Créer un repas', class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+</div>

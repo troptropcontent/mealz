@@ -10,7 +10,8 @@ class Ability
     can [:index, :new], Event, guests: { user_id: user.id }, deleted: false
     can [:show, :new, :create, :destroy], Event
 
-    can [:destroy], Meal, event: { guests: { user_id: user.id } }
+    can [:destroy, :create] , Meal, event: { guests: { user_id: user.id } }
+    can [:new] , Meal
 
     #
     # The first argument to `can` is the action you are giving the user
