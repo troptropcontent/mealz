@@ -1,6 +1,11 @@
 
-<div class="w-full p-10 bg-white rounded-md mt-4">
-    <%= form_with model: meal, class: "flex flex-col" do |form| %>
+<div class="flex flex-col w-full bg-white mt-4">
+    <div class="w-full bg-white flex justify-end pt-2 pr-2">
+        <%= link_to event_path(@event) do %>
+            <%= inline_svg_tag 'icons/x.svg' %>
+        <% end %>
+    </div>
+    <%= form_with model: meal, class: "w-full bg-white flex flex-col px-10 pb-10" do |form| %>
         <%= form.label :scheduled_on, "Jour" %>
         <%= form.select :scheduled_on, @event.days.map{|day| [french_date(day), day]}, {}, class: "mb-2" %>
         <%= form.label :kind, "Type" %>
