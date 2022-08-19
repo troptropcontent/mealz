@@ -1,0 +1,16 @@
+<div class="flex flex-col w-full bg-white mt-4">
+    <div class="w-full bg-white flex justify-end pt-2 pr-2">
+        <%= link_to meal_path(@meal) do %>
+            <%= inline_svg_tag 'icons/x.svg' %>
+        <% end %>
+    </div>
+    <%= form_with model: course, class: "w-full bg-white flex flex-col px-10 pb-10" do |form| %>
+        <%= form.label :name, "Nom du plat" %>
+        <%= form.text_field :name %>
+        <%= form.label :kind, "Type" %>
+        <%= form.select :kind, Course.kinds.keys %>
+        <%= form.hidden_field :meal_id, value: @meal.id %>
+        <%= form.submit 'Créer un plat', class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+</div>
+

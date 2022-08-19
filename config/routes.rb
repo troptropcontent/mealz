@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'courses/new'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,5 +8,9 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :new, :create, :destroy, :show] do
     resources :meals, only: [:new]
   end
-  resources :meals, only: [:destroy, :create, :show]
+  resources :meals, only: [:destroy, :create, :show] do
+    resources :courses, only: [:new]
+  end
+  resources :courses, only: [:create, :destroy]
+ 
 end
