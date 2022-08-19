@@ -7,7 +7,6 @@ class MealsController < ApplicationController
 
     def new 
         @event = Event.find(params[:event_id])
-        @meal = Meal.new
     end
 
     def create
