@@ -8,7 +8,7 @@ class Ability
     #
     return unless user.present?
     can [:index, :new], Event, guests: { user_id: user.id }
-    can [:new, :create], Event
+    can [:new, :create, :destroy], Event
 
     #
     # The first argument to `can` is the action you are giving the user

@@ -1,0 +1,11 @@
+<div class="flex bg-white my-2 rounded-md">
+    <%= button_to destroy_path(model), method: :delete, class: "flex-none p-2 flex justify-center flex-col border-r-2 border-black px-4 h-full" do %>
+            <%= inline_svg_tag 'icons/trash-2.svg' %>
+    <% end %>
+    <div class="grow p-2 text-end">
+        <p><%= title %></p>
+        <% if subtitle %>
+            <p><%= subtitle %></p>
+        <% end %>
+    </div>
+</div>

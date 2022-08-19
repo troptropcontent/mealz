@@ -1,9 +1,9 @@
 <% if @events.empty? %>
   <%= render 'ui/simple_card', content: "Vous ne faites partie d'aucuns evenement pour le moment. Veuillez en créer un ou en rejoindre un." %>
 <% else %>
-  <div>
+  <div class="flex flex-col w-full">
     <% @events.each do |event| %>
-      <%= render 'ui/simple_card', content: event.name %>
+      <%= render 'ui/deletable_card', model: event, title: event.name, subtitle: period(event) %>
     <% end %>
   </div>
 <% end %>
