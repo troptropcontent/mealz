@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def create
     @event.save!
     @event.guests.create!(nickname: current_user.username, user: current_user)
+    create_meals!
     redirect_to events_path
   end
 
@@ -21,5 +22,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :start_on, :end_on)
+  end
+
+  def create_meals!
+    MealsGenerator.new(@event).call
   end
 end
