@@ -1,0 +1,8 @@
+<div class="flex flex-col w-full">
+    <% (@event.start_on..@event.end_on).each do |day| %>
+        <%= render 'ui/simple_card', content: french_date(day)  %>
+        <% @event.meals.where(scheduled_on: day).each do |meal| %>
+          <%= render 'ui/deletable_card', model: meal, title: meal.kind, subtitle: nil %>
+        <% end %>
+    <% end %>
+</div>

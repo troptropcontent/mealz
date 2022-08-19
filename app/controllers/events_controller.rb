@@ -15,6 +15,9 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def show
+  end
+
   def new
   end
 
