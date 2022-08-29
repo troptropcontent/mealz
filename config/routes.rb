@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'courses/new'
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :meals, only: [:destroy, :create, :show] do
     resources :courses, only: [:new]
   end
-  resources :courses, only: [:create, :destroy]
+  resources :courses, only: [:create, :destroy] do
+    resources :recipes, only: [:new]
+  end
+  resources :recipes, only: [:new]
  
 end

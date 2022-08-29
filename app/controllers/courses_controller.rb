@@ -5,7 +5,8 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course.save!
+    RecipeParamsHandler.new(@course, recipe_params).call
+    
     redirect_to meal_path(@course.meal)
   end
 
@@ -13,10 +14,19 @@ class CoursesController < ApplicationController
     @course.destroy
     redirect_to meal_path(@course.meal)
   end
-
+ 
   private
 
   def course_params
-    params.require(:course).permit(:name, :description, :meal_id, :kind)
+    params.require(:course).permit(
+      :name, 
+      :description, 
+      :meal_id, 
+      :kind, 
+      )
+  end
+
+  def recipe_params
+    params.require(:course).permit(recipes_attributes: [:quantity, ingredient: [:unit, :name]])[:recipes_attributes].values
   end
 end

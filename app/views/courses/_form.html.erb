@@ -8,7 +8,23 @@
         <%= form.label :name, "Nom du plat" %>
         <%= form.text_field :name %>
         <%= form.label :kind, "Type" %>
-        <%= form.select :kind, Course.kinds.keys %>
+        <%= form.select :kind, Course.kinds.keys, {}, class: "mb-2"%>
+        <p>Composition</p>
+        <hr class='border-t-2 border-black mb-2'>
+        <% 10.times do |n| %>
+            <%= form.fields_for :recipes, Recipe.new do |recipe_form| %>
+                <%= recipe_form.fields_for :ingredient, Ingredient.new do |ingredient_form| %>
+                    <%= ingredient_form.text_field :name, placeholder: "Ingredient #{n+1}", list: "ingredients_autocomplete" %>
+                    <datalist id="ingredients_autocomplete">
+                        <% Ingredient.all.each do |ingredient| %>
+                          <option value="<%= ingredient.name.capitalize %>"> <%= ingredient.unit %> </option>
+                        <% end %>
+                    </datalist>
+                    <%= ingredient_form.select :unit, Ingredient.units.keys %>
+                <% end %>
+                <%= recipe_form.number_field :quantity, placeholder: "Quantité", class:"mb-2" %>
+            <% end %>
+        <% end %>
         <%= form.hidden_field :meal_id, value: @meal.id %>
         <%= form.submit 'Créer un plat', class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
     <% end %>

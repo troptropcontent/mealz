@@ -16,6 +16,9 @@ class Ability
     can [:destroy, :create, :show] , Course, meal: { event: { guests: { user_id: user.id } } } 
     can [:new] , Course
 
+    can [:create] , Recipe, course: { meal: { event: { guests: { user_id: user.id } } } }
+    can [:new] , Recipe
+
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
