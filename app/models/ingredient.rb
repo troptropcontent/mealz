@@ -5,5 +5,6 @@ class Ingredient < ApplicationRecord
     litre
     boite
   ]
-  
+
+  validates :name, uniqueness: true  
 end
