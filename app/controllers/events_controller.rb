@@ -1,20 +1,17 @@
 class EventsController < ApplicationController
 
   def create
-    build_event
-    @event.save!
-    create_meals!
-    redirect_to event_path(@event)
-  end
-
-  def destroy
-    load_event
-    @event.update(deleted: true)
-    redirect_to event_path(@event)
+    @event = Event.new(event_params)
+    if @event.save!
+      create_meals!
+      redirect_to event_path(@event)
+    else
+      redirect_to new_event_path
+    end
   end
 
   def show
-    load_event
+    @event = Event.find(params[:id])
   end
 
   def new
@@ -31,11 +28,4 @@ class EventsController < ApplicationController
     MealsGenerator.new(@event).call
   end
 
-  def load_event
-    @event = Event.find(params[:id])
-  end
-
-  def build_event
-    @event = Event.new(event_params)
-  end
 end
