@@ -1,24 +1,24 @@
 class EventsController < ApplicationController
-  load_and_authorize_resource
-  def index
-  end
 
   def create
+    build_event
     @event.save!
-    @event.guests.create!(nickname: current_user.username, user: current_user)
     create_meals!
-    redirect_to events_path
+    redirect_to event_path(@event)
   end
 
   def destroy
+    load_event
     @event.update(deleted: true)
-    redirect_to events_path
+    redirect_to event_path(@event)
   end
 
   def show
+    load_event
   end
 
   def new
+    @event= Event.new
   end
 
   private
@@ -29,5 +29,13 @@ class EventsController < ApplicationController
 
   def create_meals!
     MealsGenerator.new(@event).call
+  end
+
+  def load_event
+    @event = Event.find(params[:id])
+  end
+
+  def build_event
+    @event = Event.new(event_params)
   end
 end

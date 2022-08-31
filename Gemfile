@@ -34,7 +34,7 @@ gem "jbuilder"
 gem "redis", "~> 4.0"
 
 #devise
-gem 'devise'
+# gem 'devise'
 
 #cancancan
 gem 'cancancan'
