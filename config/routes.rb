@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "events#index"
   resources :events, only: [:index, :new, :create, :destroy, :show] do
     resources :meals, only: [:new]
+    resource :shopping_list, only: :show
   end
   resources :meals, only: [:destroy, :create, :show] do
     resources :courses, only: [:new]

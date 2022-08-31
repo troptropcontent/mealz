@@ -7,4 +7,6 @@
     <% end %>
   </div>
 <% end %>
-<%= render 'ui/floating_bottom_right_button', value: "+", path: new_event_path %>
+<%= render 'ui/floating_bottom_right_button', path: new_event_path do %>
+    <%= inline_svg_tag 'icons/plus.svg' %>
+<% end %>

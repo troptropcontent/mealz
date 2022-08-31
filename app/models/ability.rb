@@ -9,6 +9,7 @@ class Ability
     return unless user.present?
     can [:index, :new], Event, guests: { user_id: user.id }, deleted: false
     can [:show, :new, :create, :destroy], Event
+    can [:show], ShoppingList, event: { guests: { user_id: user.id } }
 
     can [:destroy, :create, :show] , Meal, event: { guests: { user_id: user.id } }
     can [:new] , Meal

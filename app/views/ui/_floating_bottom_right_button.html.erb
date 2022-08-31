@@ -1,21 +1,45 @@
-<%= link_to(
-    path, 
-    class: "
-    fixed 
-    z-90 
-    bottom-10 
-    right-5 
-    bg-blue-600 
-    w-14
-    h-14 
-    rounded-full 
-    drop-shadow-lg 
-    flex 
-    justify-center 
-    items-center 
-    text-white 
-    text-4xl 
-    "
-) do %>
-    <%= yield %>
+
+<% if block_given? %>
+    <%= link_to(
+        path, 
+        class: "
+        fixed 
+        z-90 
+        bottom-10 
+        right-5 
+        bg-blue-600 
+        w-14
+        h-14 
+        rounded-full 
+        drop-shadow-lg 
+        flex 
+        justify-center 
+        items-center 
+        text-white 
+        text-4xl 
+        "
+    ) do %>
+        <%= yield %>
+    <% end %>
+<% else %>
+    <%= link_to(
+            value,
+            path, 
+            class: "
+            fixed 
+            z-90 
+            bottom-10 
+            right-5 
+            bg-blue-600 
+            w-14
+            h-14 
+            rounded-full 
+            drop-shadow-lg 
+            flex 
+            justify-center 
+            items-center 
+            text-white 
+            text-4xl 
+            "
+    ) %>
 <% end %>

@@ -1,0 +1,19 @@
+en:
+  ingredient:
+    unit:
+      piéce:
+        zero: piéces
+        one: piéce
+        other: piéces
+      gramme:
+        zero: grammes
+        one: gramme
+        other: grammes
+      litre:
+        zero: litres
+        one: litre
+        other: litres
+      boite:
+        zero: boites
+        one: boite
+        other: boites
