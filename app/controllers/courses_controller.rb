@@ -10,6 +10,16 @@ class CoursesController < ApplicationController
     redirect_to meal_path(@course.meal)
   end
 
+  def show
+    
+  end
+
+  def update
+    RecipeParamsHandler.new(@course, recipe_params).call
+    
+    redirect_to meal_path(@course.meal)
+  end
+
   def destroy
     @course.destroy
     redirect_to meal_path(@course.meal)

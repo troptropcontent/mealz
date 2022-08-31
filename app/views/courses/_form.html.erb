@@ -1,6 +1,6 @@
 <div class="flex flex-col w-full bg-white mt-4">
     <div class="w-full bg-white flex justify-end pt-2 pr-2">
-        <%= link_to meal_path(@meal) do %>
+        <%= link_to meal_path(meal) do %>
             <%= inline_svg_tag 'icons/x.svg' %>
         <% end %>
     </div>
@@ -11,31 +11,16 @@
         <%= form.select :kind, Course.kinds.keys, {}, class: "mb-2"%>
         <p>Composition</p>
         <hr class='border-t-2 border-black mb-2'>
-        <% 10.times do |n| %>
-            <div data-controller= "course" class="mb-2 flex justify-between flex-col sm:flex-row" >
-                <%= form.fields_for :recipes, Recipe.new do |recipe_form| %>
-                    <%= recipe_form.fields_for :ingredient, Ingredient.new(unit: nil) do |ingredient_form| %>
-                        <%= ingredient_form.text_field( 
-                            :name,
-                            placeholder: "Ingredient #{n+1}",
-                            list: "ingredients_autocomplete", 
-                            data: {action: "change->course#update_ingredient_unit"},
-                            class: 'flex-grow'
-                        )%>
-
-                        <datalist id="ingredients_autocomplete">
-                            <% Ingredient.all.each do |ingredient| %>
-                                <option value="<%= ingredient.name.capitalize %>" data-course-target="option" ><%= ingredient.unit %></option>
-                            <% end %>
-                        </datalist>
-                        <%= ingredient_form.select :unit, Ingredient.units.keys, {:prompt => 'Unité'}, { data: { course_target: 'unit' }, disabled: true} %>
-                    <% end %>
-                    <%= recipe_form.number_field :quantity, placeholder: "Quantité", disabled: true, "data-course-target": "quantity"  %>
-                <% end %>
-            </div>
-        <% end %>
-        <%= form.hidden_field :meal_id, value: @meal.id %>
-        <%= form.submit 'Créer un plat', class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+        <div clas="flex flex-col">
+            <% 10.times do |n| %>
+                <%= render 'recipe_sub_form', course_form: form, index: n, recipe: recipes[n] || course.recipes.build %>
+            <% end %>
+        </div>
+        <%= form.hidden_field :meal_id, value: meal.id %>
+        <%= form.submit( 
+            course.new_record? ? "Creer un plat" : "Modifier le plat" ,
+            class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' 
+        )%>
     <% end %>
 </div>
 

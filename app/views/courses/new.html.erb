@@ -1,1 +1,1 @@
-<%= render 'form', course: @course %>
+<%= render 'form', course: @course, meal: @meal, recipes: @course.recipes.includes(:ingredient) %>

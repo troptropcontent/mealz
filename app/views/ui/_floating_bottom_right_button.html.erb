@@ -1,5 +1,4 @@
 <%= link_to(
-    value, 
     path, 
     class: "
     fixed 
@@ -17,4 +16,6 @@
     text-white 
     text-4xl 
     "
-) %>
+) do %>
+    <%= yield %>
+<% end %>

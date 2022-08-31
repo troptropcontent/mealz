@@ -7,6 +7,7 @@ class RecipeParamsHandler
 
   def call
     return unless @course.save
+    @course.recipes.destroy_all
     relevant_params.each do |recipe_param|
       ingredient = safely_find_or_create_ingredient(recipe_param[:ingredient])
       recipe = safely_create_or_update_recipe(ingredient, recipe_param[:quantity])

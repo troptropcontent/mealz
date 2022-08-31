@@ -13,10 +13,10 @@ class Ability
     can [:destroy, :create, :show] , Meal, event: { guests: { user_id: user.id } }
     can [:new] , Meal
 
-    can [:destroy, :create, :show] , Course, meal: { event: { guests: { user_id: user.id } } } 
+    can [:destroy, :create, :show, :update] , Course, meal: { event: { guests: { user_id: user.id } } } 
     can [:new] , Course
 
-    can [:create] , Recipe, course: { meal: { event: { guests: { user_id: user.id } } } }
+    can [:create, :show] , Recipe, course: { meal: { event: { guests: { user_id: user.id } } } }
     can [:new] , Recipe
 
     #
