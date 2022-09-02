@@ -1,12 +1,16 @@
 <div class="flex flex-col w-full">
     <% (@event.start_on..@event.end_on).each do |day| %>
-        <%= render(
-            'ui/simple_card', 
-            content: french_date(day), 
-            subcontent: link_to("+", new_event_meal_path(@event, {meal: {scheduled_on: day}}))
-        )  %>
-        <% @event.meals.where(scheduled_on: day).order(:kind).each do |meal| %>
-          <%= render 'ui/deletable_card', model: meal, title: meal.kind, subtitle: nil %>
+        <%= render 'ui/expandable_card', title: french_date(day) do |item| %>
+          <% @event.meals.where(scheduled_on: day).order(:kind).each do |meal| %>
+            <div class="flex justify-between pb-2">
+                <% if meal.courses.any? %>
+                  <%= inline_svg_tag 'icons/check-square.svg' %>
+                <% else %>
+                  <%= inline_svg_tag 'icons/square.svg' %>
+                <% end %>
+                <%= link_to meal.kind.capitalize, show_path(meal) %>
+            </div>
+          <% end %>
         <% end %>
     <% end %>
 </div>
