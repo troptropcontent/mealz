@@ -1,18 +1,19 @@
-<div class="flex flex-col w-full">
-    <%= render(
-            'ui/simple_card', 
-            content: @meal.kind.capitalize + " du " + french_date(@meal.scheduled_on), 
-            subcontent: link_to(event_path(@meal.event)){inline_svg_tag 'icons/x.svg'}
-        )  
-    %>
-    <% Course.kinds.keys.each do |kind| %>
-       <%= render(
-            'ui/simple_card', 
-            content: kind.capitalize, 
-            subcontent: link_to(new_meal_course_path(@meal, {course: {kind: kind}})){inline_svg_tag 'icons/plus.svg'}
-        )  %>
-        <% @meal.courses.where(kind: kind).each do |course| %>
-          <%= render 'ui/deletable_card', model: course, title: course.name, subtitle: nil %>
-        <% end %>
+<div class="flex flex-col w-full bg-white p-4 rounded-md shadow-md">
+    <div class="flex justify-between mb-4">
+        <p><%= @meal.kind.capitalize + " du " + french_date(@meal.scheduled_on) %></p>
+        <%= link_to(event_path(@meal.event)){inline_svg_tag 'icons/x.svg'} %>
+    </div>
+    <% if @meal.courses.any? %>
+      <% @meal.courses.each do |course| %>
+          <div class="flex justify-between">
+            <%= link_to "#{course.name} (#{course.kind.capitalize})", show_path(course)%>
+            <%= button_to destroy_path(course), method: :delete do %>
+                <%= inline_svg_tag 'icons/trash-2.svg' %>
+            <% end %>
+          </div>
+      <% end %>
+    <% else %>
+          <p>Aucun plat n'a été créé pour ce repas. Vous pouvez en ajouter un via le bouton ci-dessous</p>
     <% end %>
+    <%= link_to 'Ajouter un repas', new_meal_course_path(@meal), class: "bg-sky-500 py-2 rounded-md text-white text-center mt-4" %>
 </div>
