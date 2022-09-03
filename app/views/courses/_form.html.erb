@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full bg-white mt-4">
+<div class="flex flex-col w-full bg-white mt-4 rounded-md shadow-md mb-4 pb-4">
     <div class="flex justify-between p-4">
         <p>Nouveau plat</p>
         <div class="bg-white flex justify-end">
@@ -7,7 +7,7 @@
             <% end %>
         </div>
     </div>
-    <%= form_with model: course, class: "w-full bg-white flex flex-col px-4 pb-10" do |form| %>
+    <%= form_with model: course, class: "w-full bg-white flex flex-col px-4" do |form| %>
         <%= form.fields_for :meal, meal do |meal_form| %>
             <%= meal_form.label :scheduled_on, "Date" %>
             <%= meal_form.text_field :scheduled_on, data: {
