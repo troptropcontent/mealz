@@ -1,13 +1,12 @@
 <div class="flex flex-col w-full bg-white mt-4 rounded-md shadow-md mb-4 pb-4">
-    <div class="flex justify-between p-4">
-        <p>Nouveau plat</p>
-        <div class="bg-white flex justify-end">
+    <%= form_with model: course, class: "w-full bg-white flex flex-col px-4" do |form| %>
+        <div class="flex justify-between mt-4 mb-2">
+            <p>Plat</p>
             <%= link_to meal_path(meal) do %>
                 <%= inline_svg_tag 'icons/x.svg' %>
             <% end %>
         </div>
-    </div>
-    <%= form_with model: course, class: "w-full bg-white flex flex-col px-4" do |form| %>
+        <hr class='border-t-2 border-black mb-4'>
         <%= form.fields_for :meal, meal do |meal_form| %>
             <%= meal_form.label :scheduled_on, "Date" %>
             <%= meal_form.text_field :scheduled_on, data: {
@@ -21,8 +20,8 @@
         <%= form.select :kind, Course.kinds.keys, {}, class: "mb-2"%>
         <%= form.label :name, "Nom du plat" %>
         <%= form.text_field :name %>
-        <p>Composition</p>
-        <hr class='border-t-2 border-black mb-2'>
+        <p class="mt-4 mb-2 ">Composition</p>
+        <hr class='border-t-2 border-black mb-4'>
         <div clas="flex flex-col">
             <% 10.times do |n| %>
                 <%= render 'recipe_sub_form', course_form: form, index: n, recipe: recipes[n] || course.recipes.build %>
