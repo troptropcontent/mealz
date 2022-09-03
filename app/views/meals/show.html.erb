@@ -13,7 +13,10 @@
           </div>
       <% end %>
     <% else %>
-          <p>Aucun plat n'a été créé pour ce repas. Vous pouvez en ajouter un via le bouton ci-dessous</p>
+          <p>Aucun plat n'a été créé pour ce repas. Vous pouvez en ajouter un via les bouton ci-dessous ou supprimer le repas</p>
     <% end %>
-    <%= link_to 'Ajouter un repas', new_meal_course_path(@meal), class: "bg-sky-500 py-2 rounded-md text-white text-center mt-4" %>
+    <div class="flex justify-between">
+        <%= button_to 'Supprimer ce repas', destroy_path(@meal), method: :delete, class: "bg-red-500 p-2 rounded-md text-white text-center mt-4" %>
+        <%= link_to 'Ajouter un plat', new_meal_course_path(@meal), class: "bg-sky-500 p-2 rounded-md text-white text-center mt-4" %>
+    </div>
 </div>

@@ -5,7 +5,8 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
+    @meal = Meal.find_by(meal_params)
+    @course = Course.new(meal: @meal, **course_params)
     RecipeParamsHandler.new(@course, recipe_params).call
 
     redirect_to meal_path(@course.meal)
@@ -16,7 +17,9 @@ class CoursesController < ApplicationController
   end
 
   def update
-    load_course
+    @meal = Meal.find_by(meal_params)
+    @course = Course.find(params[:id])
+    @course.update(meal: @meal, **course_params)
     RecipeParamsHandler.new(@course, recipe_params).call
 
     redirect_to meal_path(@course.meal)
@@ -34,9 +37,12 @@ class CoursesController < ApplicationController
     params.require(:course).permit(
       :name,
       :description,
-      :meal_id,
       :kind
     )
+  end
+
+  def meal_params
+    params.require(:course).permit(meal: {})[:meal]
   end
 
   def recipe_params
