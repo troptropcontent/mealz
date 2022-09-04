@@ -4,8 +4,8 @@
         <%= render 'ui/dropdown_menu', 
             links: [
                 {content: "Voir la liste de course", path:event_shopping_list_path(@event), icon: "shopping-cart"},
+                {content: "Gérer les participants", path:event_guests_path(@event), icon: "user"},
                 {content: "Modifier les dates", path:"#", icon: "calendar", class: "text-slate-300"},
-                {content: "Gérer les participants", path:"#", icon: "user", class: "text-slate-300"},
             ] 
         %>
     <% else %>

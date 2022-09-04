@@ -1,0 +1,12 @@
+<ul id="tabs" class="flex gap-1">
+    <% tabs.each do |tab| %>
+        <% if tab == active %>
+          <li class="px-4 py-2 rounded-t-md bg-white"><%= tab %></li>
+        <% else %>
+          <li class="px-4 py-2 rounded-t-md bg-slate-200 grow text-center"><%= tab %></li>
+        <% end %>
+    <% end %>
+</ul>
+<div id="content" class="h-full bg-white rounded-b-md p-4">
+    <%= yield %>
+</div>

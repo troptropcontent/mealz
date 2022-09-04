@@ -1,0 +1,18 @@
+<%= render "ui/tabs", tabs: ["Participants", "Brigades"], active: "Participants" do %>
+    <div class="flex flex-col justify-between h-full">
+        <% if @event.guests.empty? %>
+        Vous n'avez ajouté aucuns participants à l'événement pour le moment
+        <% else %>
+        <ul>
+            <% @event.guests.each do |guest| %>
+            <li><%= guest.nickname %></li>
+            <% end %>
+        </ul>
+        <% end %>
+        <%= form_with model: @event.guests.new  do |form| %>
+            <%= form.text_field :nickname, placeholder: "Nom du participant", class: "w-full rounded-t-md" %>
+            <%= form.hidden_field :event_id, value: @event.id %>
+            <%= form.submit "Ajouter un participant", class:"bg-sky-500 text-white py-2 w-full rounded-b-md" %>
+        <% end %>
+    </div>
+<% end %>
