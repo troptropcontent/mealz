@@ -8,6 +8,12 @@ class GuestsController < ApplicationController
     redirect_to event_guests_path(guest.event)
   end
 
+  def destroy
+    guest = Guest.find(params[:id])
+    guest.destroy
+    redirect_to event_guests_path(guest.event)
+  end
+
   private
 
   def guest_params

@@ -5,7 +5,12 @@
         <% else %>
         <ul>
             <% @event.guests.each do |guest| %>
-            <li><%= guest.nickname %></li>
+            <li class="flex">
+                <%= button_to destroy_path(guest), method: :delete do %>
+                <%= inline_svg_tag 'icons/trash-2.svg' %>
+                <% end %>
+                <p class="ml-2 my-auto"><%= guest.nickname.capitalize %></p>
+            </li>
             <% end %>
         </ul>
         <% end %>

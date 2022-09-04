@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resource :shopping_list, only: :show
     resources :guests, only: %i[index]
   end
-  resources :guests, only: [:create]
+  resources :guests, only: %i[create destroy]
 
   resources :meals, only: %i[destroy create show] do
     resources :courses, only: [:new]
