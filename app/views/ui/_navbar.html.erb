@@ -1,3 +1,14 @@
 <div class="bg-white flex justify-between p-2 w-full">
-    <%= link_to "MEALZ", root_path, class: "font-bold text-xl" %>
+    <% if @event.persisted? %>  
+        <%= link_to "MEALZ", event_path(@event), class: "font-bold text-xl" %>
+        <%= render 'ui/dropdown_menu', 
+            links: [
+                {content: "Voir la liste de course", path:event_shopping_list_path(@event), icon: "shopping-cart"},
+                {content: "Modifier les dates", path:"#", icon: "calendar", class: "text-slate-300"},
+                {content: "Gérer les participants", path:"#", icon: "user", class: "text-slate-300"},
+            ] 
+        %>
+    <% else %>
+        <%= link_to "MEALZ", root_path, class: "font-bold text-xl" %>
+    <% end %>
 </div>

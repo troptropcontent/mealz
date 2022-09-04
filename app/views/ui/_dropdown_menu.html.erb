@@ -1,0 +1,19 @@
+<div data-controller="dropdown-menu">
+    <button data-action="dropdown-menu#toggleMenu">
+        <%= inline_svg_tag 'icons/menu.svg' %>
+    </button>
+    <ul data-dropdown-menu-target="dropdownMenu" class="hidden bg-white absolute right-0 text-right p-2 rounded-b-md shadow-lg">
+        <% links.each_with_index do |link, index| %>
+            <li>
+                <% if link[:icon] %>
+                  <%= link_to link[:path], class:"flex justify-end mb-2 " + link[:class].to_s do %>
+                    <p class="mr-2"><%= link[:content]%></p>
+                    <%= inline_svg_tag "icons/#{link[:icon]}.svg" %>
+                  <% end %>
+                <% else %>
+                    <%= link_to link[:content], link[:path] %>
+                <% end %>
+            </li>
+        <% end %>
+    </ul>
+</div>
