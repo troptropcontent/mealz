@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_04_180553) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_04_200706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "brigades", force: :cascade do |t|
+    t.string "name"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_brigades_on_event_id"
+  end
+
+  create_table "chefs", force: :cascade do |t|
+    t.bigint "brigade_id", null: false
+    t.bigint "guest_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brigade_id"], name: "index_chefs_on_brigade_id"
+    t.index ["guest_id"], name: "index_chefs_on_guest_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.bigint "meal_id", null: false
@@ -68,6 +85,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_180553) do
     t.index ["ingredient_id"], name: "index_recipes_on_ingredient_id"
   end
 
+  add_foreign_key "brigades", "events"
+  add_foreign_key "chefs", "brigades"
+  add_foreign_key "chefs", "guests"
   add_foreign_key "courses", "meals"
   add_foreign_key "guests", "events"
   add_foreign_key "meals", "events"
