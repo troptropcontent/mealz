@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_201201) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_04_180553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -35,13 +35,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_201201) do
   end
 
   create_table "guests", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "event_id", null: false
     t.string "nickname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_guests_on_event_id"
-    t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -61,11 +59,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_201201) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.bigint "course_id", null: false
     t.bigint "ingredient_id", null: false
     t.float "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "course_id"
     t.index ["course_id"], name: "index_recipes_on_course_id"
     t.index ["ingredient_id"], name: "index_recipes_on_ingredient_id"
   end
