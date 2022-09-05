@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @meal = Meal.find(params[:meal_id])
+    @event = @meal.event
   end
 
   def create
