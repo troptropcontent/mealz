@@ -5,8 +5,10 @@ Rails.application.routes.draw do
     resources :meals, only: [:new]
     resource :shopping_list, only: :show
     resources :guests, only: %i[index]
+    resources :brigades, only: %i[index]
   end
   resources :guests, only: %i[create destroy]
+  resources :brigades, only: %i[create destroy]
 
   resources :meals, only: %i[destroy create show] do
     resources :courses, only: [:new]

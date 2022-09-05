@@ -1,4 +1,9 @@
-<%= render "ui/tabs", tabs: ["Participants", "Brigades"], active: "Participants" do %>
+<%= render "ui/tabs", 
+    tabs: {
+        guests: {content: "Participants", path: event_guests_path(@event.id)},
+        brigades: {content: "Brigades", path: event_brigades_path(@event.id)},
+    }, 
+    active: :guests do %>
     <div class="flex flex-col justify-between h-full">
         <% if @event.guests.empty? %>
         Vous n'avez ajouté aucuns participants à l'événement pour le moment
