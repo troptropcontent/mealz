@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
 
   def show
     load_course
+    @event = @course.event
   end
 
   def update
