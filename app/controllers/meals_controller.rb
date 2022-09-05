@@ -8,6 +8,7 @@ class MealsController < ApplicationController
 
     def show
         load_meal
+        @event = @meal.event
     end
 
     def new 
