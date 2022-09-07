@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :guests, only: %i[create destroy]
   resources :brigades, only: %i[create destroy]
 
-  resources :meals, only: %i[destroy create show] do
+  resources :meals, only: %i[destroy create update show] do
     resources :courses, only: [:new]
   end
   resources :courses, only: %i[create destroy show update] do

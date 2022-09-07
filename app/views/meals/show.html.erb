@@ -3,9 +3,17 @@
         <p><%= @meal.kind.capitalize + " du " + french_date(@meal.scheduled_on) %></p>
         <%= link_to(event_path(@meal.event)){inline_svg_tag 'icons/x.svg'} %>
     </div>
+    <p class="mb-2">Brigade affectée :</p>
+    <%= form_for @meal, html: {class: "flex mb-4"} do |f| %>
+        <%= f.select :brigade_id, @event.brigades.pluck(:name, :id), {include_blank: true}, class: "grow rounded-l-md"  %>
+        <%= f.button class: "bg-sky-500 text-white text-center px-3 py-2 rounded-r-md" do %>
+                        <%= inline_svg_tag 'icons/save.svg' %>
+        <% end %>
+    <% end %>
+    <p class="mb-2">Plats prévus :</p>
     <% if @meal.courses.any? %>
       <% @meal.courses.each do |course| %>
-          <div class="flex justify-between">
+          <div class="flex justify-between mb-2">
             <%= link_to "#{course.name} (#{course.kind.capitalize})", show_path(course)%>
             <%= button_to destroy_path(course), method: :delete do %>
                 <%= inline_svg_tag 'icons/trash-2.svg' %>
@@ -13,7 +21,7 @@
           </div>
       <% end %>
     <% else %>
-          <p>Aucun plat n'a été créé pour ce repas. Vous pouvez en ajouter un via les bouton ci-dessous ou supprimer le repas</p>
+          <p class="mb-2">Aucun plat n'a été créé pour ce repas. Vous pouvez en ajouter un via les bouton ci-dessous ou supprimer le repas</p>
     <% end %>
     <div class="flex flex-col sm:flex-row justify-between">
         <%= link_to 'Ajouter un plat', new_meal_course_path(@meal), class: "bg-sky-500 p-2 rounded-md text-white text-center mt-4" %>

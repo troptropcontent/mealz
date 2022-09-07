@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_04_200706) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_174138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_200706) do
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "brigade_id"
+    t.index ["brigade_id"], name: "index_meals_on_brigade_id"
     t.index ["event_id"], name: "index_meals_on_event_id"
   end
 
@@ -90,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_200706) do
   add_foreign_key "chefs", "guests"
   add_foreign_key "courses", "meals"
   add_foreign_key "guests", "events"
+  add_foreign_key "meals", "brigades"
   add_foreign_key "meals", "events"
   add_foreign_key "recipes", "courses"
   add_foreign_key "recipes", "ingredients"
