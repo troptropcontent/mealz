@@ -1,11 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
-import { useClickOutside } from 'stimulus-use'
+// import { useClickOutside } from 'stimulus-use'
 
 // Connects to data-controller="expandable-card"
 export default class extends Controller {
   static targets = [ "expandable", "chevronUp", "chevronDown" ]
   connect() {
-    useClickOutside(this)
   }
 
   get siblings() {
@@ -15,7 +14,7 @@ export default class extends Controller {
 
   toggleExpandable() {
     const isCollapsed = this.expandableTarget.classList.contains('hidden')
-
+    
     if (isCollapsed) {
       this.closeOtherCollapsables()
       this.expand()
@@ -39,10 +38,5 @@ export default class extends Controller {
     this.expandableTarget.classList.remove('hidden')
     this.chevronDownTarget.classList.add('hidden')
     this.chevronUpTarget.classList.remove('hidden')
-  }
-
-  clickOutside(event) {
-    event.preventDefault()
-    this.collapse()
   }
 }
