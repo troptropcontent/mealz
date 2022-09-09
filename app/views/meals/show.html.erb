@@ -3,11 +3,16 @@
         <p><%= @meal.kind.capitalize + " du " + french_date(@meal.scheduled_on) %></p>
         <%= link_to(event_path(@meal.event)){inline_svg_tag 'icons/x.svg'} %>
     </div>
+
     <p class="mb-2">Brigade affectée :</p>
-    <%= form_for @meal, html: {class: "flex mb-4"} do |f| %>
-        <%= f.select :brigade_id, @event.brigades.pluck(:name, :id), {include_blank: true}, class: "grow rounded-l-md"  %>
-        <%= f.button class: "bg-sky-500 text-white text-center px-3 py-2 rounded-r-md" do %>
-                        <%= inline_svg_tag 'icons/save.svg' %>
+    <% if @event.brigades.none? %>
+        <p class="mb-4">Vous n'avez ajouté aucunes brigades pour le moment. Pour en constituer et assigner ce repas rendez vous dans <%= link_to "l'espace participants", event_guests_path(@event) %></p>
+        <% else %>
+            <%= form_for @meal, html: {class: "flex mb-4"} do |f| %>
+                <%= f.select :brigade_id, @event.brigades.pluck(:name, :id), {include_blank: true}, class: "grow rounded-l-md"  %>
+                <%= f.button class: "bg-sky-500 text-white text-center px-3 py-2 rounded-r-md" do %>
+                                <%= inline_svg_tag 'icons/save.svg' %>
+                <% end %>
         <% end %>
     <% end %>
     <p class="mb-2">Plats prévus :</p>
