@@ -1,11 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
-import { useClickOutside } from 'stimulus-use'
+// import { useClickOutside } from 'stimulus-use'
 
 // Connects to data-controller="expandable-card"
 export default class extends Controller {
   static targets = [ "expandable", "chevronUp", "chevronDown" ]
   connect() {
-    useClickOutside(this)
+    // useClickOutside(this)
   }
 
   get siblings() {
@@ -41,7 +41,7 @@ export default class extends Controller {
     this.chevronUpTarget.classList.remove('hidden')
   }
 
-  clickOutside() {
-    this.collapse()
-  }
+  // clickOutside() {
+  //   this.collapse()
+  // }
 }
