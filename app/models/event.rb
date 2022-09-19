@@ -11,4 +11,8 @@ class Event < ApplicationRecord
   def days
     (start_on..end_on).to_a
   end
+
+  def ready?
+    brigades.any? && guests.any?
+  end
 end

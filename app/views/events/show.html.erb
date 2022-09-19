@@ -1,12 +1,13 @@
 <div class="flex flex-col w-full">
+    <% unless @event.ready? %>
+      <%= render 'to_do' %>
+    <% end %>
     <% (@event.start_on..@event.end_on).each do |day| %>
-        <%= render 'ui/expandable_card', title: french_date(day) do |item| %>
+        <%= render "ui/expandable_card#{'_unavailable' unless @event.ready?}", title: french_date(day) do |item| %>
           <% @event.meals.where(scheduled_on: day).order(:kind).each do |meal| %>
-            <div class="flex justify-between pb-2">
+            <div class="flex justify-end pb-2">
                 <% if meal.courses.any? %>
-                  <%= inline_svg_tag 'icons/check-square.svg' %>
-                <% else %>
-                  <%= inline_svg_tag 'icons/square.svg' %>
+                  <%= inline_svg_tag 'icons/check-square.svg', class: 'mr-2' %>
                 <% end %>
                 <%= link_to meal.kind.capitalize, show_path(meal) %>
             </div>

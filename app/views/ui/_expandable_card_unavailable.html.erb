@@ -1,0 +1,10 @@
+<div data-controller="expandable-card" class="bg-slate-200 mb-4 rounded-md p-4 shadow-md">
+    <div class="flex justify-between">
+        <p><%= title %></p>
+        <%= inline_svg_tag 'icons/chevron-down.svg', data: {"expandable-card-target": "chevronDown"}%>
+        <%= inline_svg_tag 'icons/chevron-up.svg', class: "hidden", data: {"expandable-card-target": "chevronUp"}%>
+    </div>
+    <div class="hidden mt-4">
+        <%= block_given? ? yield : content %>
+    </div>
+</div>

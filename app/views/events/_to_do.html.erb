@@ -1,0 +1,17 @@
+
+
+<%= render 'ui/card' do %>
+    <h3 class="mb-2">Pour aller plus loin vous devez finir le paramétrage de votre événement.</h3>
+    <% if @event.guests.any? %>
+        <div class="flex flex-col">
+            <p class="mb-2">Veuillez constituez vos brigades.</p>
+            <%= render 'ui/button', text: "C'est parti", path: event_brigades_path(@event) %>
+        </div>
+        <% else %>
+        <div class="flex flex-col">
+            <p class="mb-2">Veuillez ajouter des participants.</p>
+            <%= render 'ui/button', text: "C'est parti", path: event_guests_path(@event) %>
+        </div>
+    <% end %>
+<% end %>
+ 
