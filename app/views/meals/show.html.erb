@@ -19,7 +19,7 @@
     <% if @meal.courses.any? %>
       <% @meal.courses.each do |course| %>
           <div class="flex justify-between mb-2">
-            <%= link_to "#{course.name} (#{course.kind.capitalize})", show_path(course)%>
+            <%= link_to "#{course.name}", show_path(course)%>
             <%= button_to destroy_path(course), method: :delete do %>
                 <%= inline_svg_tag 'icons/trash-2.svg' %>
             <% end %>
