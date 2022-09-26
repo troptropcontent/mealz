@@ -7,4 +7,6 @@ class Course < ApplicationRecord
     attributes['quantity'].blank?
   }
   enum kind: %w[entrée plat dessert apéro]
+
+  validates :name, presence: true
 end

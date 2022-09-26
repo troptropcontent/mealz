@@ -16,17 +16,15 @@
             <%= meal_form.label :kind, "Repas" %>
             <%= meal_form.select :kind, Meal.kinds.keys,{}, class: "mb-2"%>
         <% end %>
-        <%= form.label :kind, "Type" %>
-        <%= form.select :kind, Course.kinds.keys, {}, class: "mb-2"%>
-        <%= form.label :name, "Nom du plat" %>
-        <%= form.text_field :name %>
+            <%= form.label :name, "Nom du plat" %>
+            <%= form.text_field :name, class: 'w-full'%>
+            <% if course.errors.include?(:name) %>
+                <% course.errors.full_messages_for(:name).each do |message| %>
+                    <p class='error_explanation'>* <%= message %></p>
+                <% end %>
+            <% end %>
         <p class="mt-4 mb-2 ">Composition</p>
         <hr class='border-t-2 border-black mb-4'>
-        <div clas="flex flex-col">
-            <% 10.times do |n| %>
-                <%= render 'recipe_sub_form', course_form: form, index: n, recipe: recipes[n] || course.recipes.build %>
-            <% end %>
-        </div>
         <%= form.hidden_field :meal_id, value: meal.id %>
         <%= form.submit( 
             course.new_record? ? "Creer un plat" : "Modifier le plat" ,
