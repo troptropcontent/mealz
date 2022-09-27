@@ -23,8 +23,6 @@
                     <p class='error_explanation'>* <%= message %></p>
                 <% end %>
             <% end %>
-        <p class="mt-4 mb-2 ">Composition</p>
-        <hr class='border-t-2 border-black mb-4'>
         <%= form.hidden_field :meal_id, value: meal.id %>
         <%= form.submit( 
             course.new_record? ? "Creer un plat" : "Modifier le plat" ,
