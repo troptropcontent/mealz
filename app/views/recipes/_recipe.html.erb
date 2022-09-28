@@ -1,1 +1,1 @@
-<p><%= "#{recipe.ingredient.name} (#{recipe.ingredient.unit}) : #{recipe.quantity}" %></p>
+<p><%= I18n.t 'recipe.show', name: recipe.ingredient.name.capitalize, unit: recipe.ingredient.unit, quantity: recipe.quantity%></p>

@@ -1,0 +1,3 @@
+en:
+  recipe:
+    show: "%{name} (%{unit}) : %{quantity}"
