@@ -23,3 +23,19 @@ div.field_with_errors > :is(input, textarea, select) {
 p.error_explanation {
   @apply text-red-900 text-sm;
 }
+
+p {
+  @apply text-base;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h1 {
+  @apply text-2xl;
+}

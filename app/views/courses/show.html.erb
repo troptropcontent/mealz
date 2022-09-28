@@ -1,1 +1,14 @@
-<p>Hello From the course show</p>
+<div class='h-full bg-white rounded-md p-4 flex flex-col'>
+    <h2 class='text-center mb-2'><%= I18n.t 'course.show_title', name: @course.name.capitalize, scheduled_on: @course.meal.scheduled_on  %></h2>
+    <div class="h-full flex flex-col">
+        <h3 class="mb-2"><%= I18n.t 'course.composition'%></h3>  
+        <div class='grow'>
+            <% if @course.recipes.exists? %>
+              <%= render 'recipes/index', recipes:  @course.recipes %>
+            <% else %>
+             <%= render 'recipes/no_recipes' %>
+            <% end %> 
+        </div>
+        <%= link_to I18n.t('course.edit_composition'), '#', class: 'bg-sky-500 text-white p-2 text-center rounded-md' %>       
+    </div>
+</div>

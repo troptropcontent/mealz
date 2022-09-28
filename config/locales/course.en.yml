@@ -1,0 +1,8 @@
+en:
+  course:
+    show_title: "%{name} prévu le %{scheduled_on}"
+    composition: "Composition :"
+    no_recipes: |
+      Ce plat n'as pas encore d'ingredient.
+      Vous pouvez en ajouter via le bouton si dessous.
+    edit_composition: Modifier la composition du plat
