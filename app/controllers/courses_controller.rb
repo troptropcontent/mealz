@@ -1,16 +1,16 @@
 class CoursesController < ApplicationController
   def new
     @course = Course.new
-    @meal = Meal.find(params[:meal_id])
+    @meal = Meal.find(course_params[:meal_id])
     @event = @meal.event
   end
 
   def create
     @meal = Meal.find_by(meal_params)
-    @course = @meal.courses.new(course_params)
     @event = @meal.event
+    @course = @meal.courses.new(course_params)
     if @course.save
-      redirect_to meal_path(@course.meal)
+      redirect_to @course
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,6 +43,7 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(
+      :meal_id,
       :name,
       :description,
       :kind
@@ -50,7 +51,9 @@ class CoursesController < ApplicationController
   end
 
   def meal_params
-    params.require(:course).permit(meal: {})[:meal]
+    params.require(:course).permit(
+      meal: [:kind, :scheduled_on, :event_id]
+    )[:meal]
   end
 
   def load_course
