@@ -1,0 +1,12 @@
+<%= base_form.fields_for :recipes, recipe, **local_assigns[:options] || {} do |recipe_fields| %>
+    <div class='flex justify-between mb-2'>
+        <div class='flex flex-col justify-center grow'>
+            <p><%= I18n.t 'recipe.public', name: ingredient_name, unit: ingredient_unit %></p>
+        </div>
+        <%= recipe_fields.hidden_field :ingredient_id, value: ingredient_id %>
+        <%= recipe_fields.number_field :quantity, class: 'w-20', value: quantity %>
+        <%= link_to '#', method: :delete, class: "flex flex-col justify-center w-10 items-center" do %>
+            <%= inline_svg_tag 'icons/trash-2.svg' %>
+        <% end %>
+    </div>
+<% end %>

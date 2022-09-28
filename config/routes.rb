@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :brigades, only: %i[create destroy]
 
   resources :meals, only: %i[destroy create update show]
-  resources :courses, only: %i[new create destroy show update] 
+  resources :courses, only: %i[new create destroy show update] do
+    get 'recipes/edit', to: 'recipes#edit'
+  end
   resources :recipes, only: %i[new]
 end

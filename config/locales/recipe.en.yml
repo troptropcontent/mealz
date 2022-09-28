@@ -1,3 +1,4 @@
 en:
   recipe:
     show: "%{name} (%{unit}) : %{quantity}"
+    public: "%{name} (%{unit})"

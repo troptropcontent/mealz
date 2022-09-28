@@ -9,6 +9,6 @@
              <%= render 'recipes/no_recipes' %>
             <% end %> 
         </div>
-        <%= link_to I18n.t('course.edit_composition'), '#', class: 'bg-sky-500 text-white p-2 text-center rounded-md' %>       
+        <%= link_to I18n.t('course.edit_composition'), course_recipes_edit_path(@course), class: 'bg-sky-500 text-white p-2 text-center rounded-md' %>       
     </div>
 </div>

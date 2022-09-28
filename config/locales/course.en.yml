@@ -6,3 +6,8 @@ en:
       Ce plat n'as pas encore d'ingredient.
       Vous pouvez en ajouter via le bouton si dessous.
     edit_composition: Modifier la composition du plat
+    recipes:
+      edit:
+        title: Composition du plat
+        sub_title: "%{name} - prévu le %{scheduled_on}"
+        edit: Modifier la composition du plat

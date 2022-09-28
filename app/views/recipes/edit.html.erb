@@ -1,0 +1,42 @@
+<%= render 'ui/page' do %>
+    <div class='mb-2'>
+        <h2 class='text-center'><%= I18n.t 'course.recipes.edit.title' %></h2>
+        <h3 class='text-center'><%= I18n.t 'course.recipes.edit.sub_title', name: @course.name.capitalize, scheduled_on: @course.meal.scheduled_on %></h3>
+    </div>
+        <%= form_with model: @course, class: 'flex flex-col justify-between grow border-2 border-slate-300 rounded-lg', data: {'controller': "recipes--edit--nested-form"} do |course_form| %>
+            <div class='flex border-b-2 border-slate-300'>
+                <%= select(:fake, :ingredient_id, @available_ingredients.collect {|ingredient| [ ingredient.name, ingredient.id ] }, {include_blank: true}, class: 'grow rounded-tl-md border-none', data: {'recipes--edit--nested-form-target':"newRecipeIngredient"}) %>
+                <%= number_field :fake, :quantity, class: 'w-20 border-none', data: {'recipes--edit--nested-form-target':"newRecipeQuantity"} %>
+                <div>
+                    <%= button_tag formaction: "#", class: 'bg-sky-500 w-10 flex flex-col justify-center items-center text-white h-full rounded-tr-md', data: {action: "recipes--edit--nested-form#addRecipe"} do %>
+                        <%= inline_svg_tag 'icons/plus.svg' %>
+                    <% end %>
+                </div>
+                <template id="template" data-recipes--edit--nested-form-target="template">
+                    <%= render 'recipes/form', 
+                        recipe: Recipe.new,
+                        ingredient_name: 'INGREDIENT_NAME', 
+                        ingredient_unit: 'INGREDIENT_UNIT',
+                        ingredient_id:  'INGREDIENT_ID',
+                        quantity: 'QUANTITY', 
+                        base_form: course_form, 
+                        options: {child_index: 'NEW_RECORD'} 
+                    %>
+                </template>
+            </div>
+            <div class='grow'>
+                <% @course.recipes.each do |recipe| %>
+                    <%= render 'recipes/form', 
+                        recipe: recipe,
+                        ingredient_name: recipe.ingredient.name, 
+                        ingredient_unit: recipe.ingredient.unit, 
+                        ingredient_id:  recipe.ingredient_id,
+                        quantity: recipe.quantity, 
+                        base_form: course_form 
+                    %>
+                <% end %>
+                <div data-recipes--edit--nested-form-target="target" class="hidden"></div>
+            </div>
+            <%= course_form.submit I18n.t('course.recipes.edit.edit'), class: 'bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-b-md' %>
+        <% end %>
+<% end %>
