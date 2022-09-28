@@ -1,29 +1,29 @@
-<div class="flex flex-col w-full bg-white mt-4 rounded-md shadow-md mb-4 pb-4">
-    <%= form_with model: course, class: "w-full bg-white flex flex-col px-4 rounded-md" do |form| %>
-        <div class="flex justify-between mt-4 mb-2">
-            <p>Plat</p>
-            <%= link_to meal_path(meal) do %>
-                <%= inline_svg_tag 'icons/x.svg' %>
-            <% end %>
-        </div>
-        <hr class='border-t-2 border-black mb-4'>
-        <%= form.fields_for :meal, meal do |meal_form| %>
-            <%= meal_form.label :scheduled_on, "Date" %>
-            <%= meal_form.text_field :scheduled_on, class: 'rounded-md',data: {
+<div class="flex flex-col w-full bg-white mt-4 rounded-md shadow-md mb-4 pb-4 px-4">
+    <div class="flex justify-between mt-4 mb-2">
+        <p>Plat</p>
+        <%= link_to meal_path(meal) do %>
+            <%= inline_svg_tag 'icons/x.svg' %>
+        <% end %>
+    </div>
+    <hr class='border-t-2 border-black mb-4'>
+    <%= form_with model: course, class: "w-full flex flex-col" do |form| %>
+        <%= form.fields_for meal do |meal_fields|%>
+            <%= meal_fields.label :scheduled_on, "Date" %>
+            <%= meal_fields.text_field :scheduled_on, class: 'rounded-md',data: {
                 controller: "flatpickr-classic",
                 options: {enable: [{from: meal.event.start_on, to: meal.event.end_on}]}
             } %>
-            <%= meal_form.label :kind, "Repas" %>
-            <%= meal_form.select :kind, Meal.kinds.keys,{}, class: "rounded-md mb-2"%>
+            <%= meal_fields.label :kind, "Repas" %>
+            <%= meal_fields.select :kind, Meal.kinds.keys,{}, class: "rounded-md mb-2"%>
+            <%= meal_fields.hidden_field :event_id %>
         <% end %>
-            <%= form.label :name, "Nom du plat" %>
-            <%= form.text_field :name, class: 'w-full rounded-md'%>
-            <% if course.errors.include?(:name) %>
-                <% course.errors.full_messages_for(:name).each do |message| %>
-                    <p class='error_explanation'>* <%= message %></p>
-                <% end %>
+        <%= form.label :name, "Nom du plat" %>
+        <%= form.text_field :name, class: 'w-full rounded-md'%>
+        <% if course.errors.include?(:name) %>
+            <% course.errors.full_messages_for(:name).each do |message| %>
+                <p class='error_explanation'>* <%= message %></p>
             <% end %>
-        <%= form.hidden_field :meal_id, value: meal.id %>
+        <% end %>
         <%= form.submit( 
             course.new_record? ? "Creer un plat" : "Modifier le plat" ,
             class: 'mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' 
