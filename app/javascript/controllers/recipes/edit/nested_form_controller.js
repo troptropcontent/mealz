@@ -49,6 +49,38 @@ export default class extends Controller {
       'INGREDIENT_ID': ingredient_id,
     }
     this.useTemplate(this.templateOptionTarget, mapping, this.newRecipeIngredientTarget, 'beforeend')
+    this.reorderOption(this.newRecipeIngredientTarget)
+  }
+
+  reorderOption(select){
+    let options = Array.from(select.options)
+    let findOptionIndexWithValue = (options, value) => {
+      return options.findIndex(option => option.value === value)
+    }
+    let removeAllChildNodes = (parent) => {
+      while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+      }
+    }
+    let firstElementCurrentIndex = findOptionIndexWithValue(options, '')
+    let firstElement = options[firstElementCurrentIndex]
+    options.splice(firstElementCurrentIndex, 1)
+    
+    let lastElementCurrentIndex = findOptionIndexWithValue(options, '+')
+    let lastElement = options[lastElementCurrentIndex]
+    options.splice(lastElementCurrentIndex, 1)
+
+    let comparator = (option_a, option_b) => {
+      if (option_a.value < option_b.value)
+         return -1;
+      if (option_a.value > option_b.value)
+         return 1;
+      return 0;
+    }
+    removeAllChildNodes(select)
+    let orderedOptions = [firstElement, ...options.sort(comparator), lastElement]
+    orderedOptions.forEach(node => select.appendChild(node))    
+    select.options[0].selected = 'selected'
   }
 
   useTemplate(template, mapping, target, position) {
