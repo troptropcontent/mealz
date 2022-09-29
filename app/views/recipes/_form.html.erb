@@ -1,11 +1,21 @@
-<%= base_form.fields_for :recipes, recipe, **local_assigns[:options] || {} do |recipe_fields| %>
-    <div class='flex justify-between mb-2'>
+<%= base_form.fields_for :recipes, Recipe.new, **local_assigns[:options] || {} do |recipe_fields| %>
+    <div class='flex justify-between mb-2 recipe-fields'>
         <div class='flex flex-col justify-center grow'>
             <p><%= I18n.t 'recipe.public', name: ingredient_name, unit: ingredient_unit %></p>
         </div>
         <%= recipe_fields.hidden_field :ingredient_id, value: ingredient_id %>
         <%= recipe_fields.number_field :quantity, class: 'w-20', value: quantity %>
-        <%= link_to '#', method: :delete, class: "flex flex-col justify-center w-10 items-center" do %>
+        <%= link_to('#', 
+            method: :delete, 
+            class: "flex flex-col justify-center w-10 items-center", 
+            data: {
+                action: "recipes--edit--nested-form#removeRecipe", 
+                'recipes--edit--nested-form-option-data-param': {
+                    ingredient_id: ingredient_id, 
+                    ingredient_unit: ingredient_unit,
+                    ingredient_name: ingredient_name}.to_json
+                }
+        ) do %>
             <%= inline_svg_tag 'icons/trash-2.svg' %>
         <% end %>
     </div>

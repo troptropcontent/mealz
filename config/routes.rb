@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :meals, only: %i[destroy create update show]
   resources :courses, only: %i[new create destroy show update] do
     get 'recipes/edit', to: 'recipes#edit'
+    post 'recipes', to: 'recipes#update'
   end
   resources :recipes, only: %i[new]
 end
