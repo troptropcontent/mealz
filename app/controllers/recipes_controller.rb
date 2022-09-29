@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
     @course = Course.find(params[:course_id])
     @event = @course.event
     @recipes = recipes
+    @preselected_ingredient_id = preselected_ingredient_id_params
     @available_ingredients = Ingredient.where.not(id: @recipes.pluck(:ingredient_id))
   end
 
@@ -40,5 +41,9 @@ class RecipesController < ApplicationController
           [recipes_attributes:
               %i[ingredient_id quantity]]
     )[:course_from_previous_page]
+  end
+
+  def preselected_ingredient_id_params
+    params.permit(:preselected_ingredient_id)[:preselected_ingredient_id]
   end
 end

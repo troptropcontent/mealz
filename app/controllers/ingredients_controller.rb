@@ -12,7 +12,13 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new(ingredient_params)
     @recipes_from_previous_page = Course.new(course_from_previous_page_params).recipes
     if @ingredient.save
-      redirect_to course_recipes_edit_path(@course, course_from_previous_page: course_from_previous_page_params)
+      redirect_to course_recipes_edit_path(
+        @course,
+        {
+          course_from_previous_page: course_from_previous_page_params.to_h,
+          preselected_ingredient_id: @ingredient.id
+        }
+      )
     else
       render :new, status: :unprocessable_entity
     end

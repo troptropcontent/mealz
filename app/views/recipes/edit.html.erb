@@ -7,7 +7,7 @@
             <div class='flex border-b-2 border-slate-300'>
                 <%= select(:fake, :ingredient_id, {}, {include_blank: true}, class: 'grow rounded-tl-md border-none', data: {'recipes--edit--nested-form-target':"newRecipeIngredient", action: "recipes--edit--nested-form#detectNewIngredientAndRedirect"}) do %>
                     <%= @available_ingredients.each do |ingredient| %>
-                        <%= content_tag(:option, ingredient.name, value: ingredient.id, data: { 'ingredient-unit': ingredient.unit }) %>
+                        <%= content_tag(:option, ingredient.name, value: ingredient.id, selected: @preselected_ingredient_id.to_i == ingredient.id,  data: { 'ingredient-unit': ingredient.unit }) %>
                     <% end %>
                         <%= content_tag(:option, 'Ajouter un ingrédient', value: '+' ) %>
                 <% end %>
