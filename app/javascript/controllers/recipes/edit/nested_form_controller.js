@@ -57,4 +57,20 @@ export default class extends Controller {
     let content = template.innerHTML.replace(regex, mapMatch)
     target.insertAdjacentHTML(position, content)
   }
+
+  detectNewIngredientAndRedirect(event) {
+    if (event.target.value === '+') {      
+      let form = event.target.form
+      let form_elements_array = Array.from(form.elements)
+      let not_course_elements = form_elements_array.filter(element => !element.id.startsWith('course_'))
+      let disabledElement = element => element.disabled = true
+      not_course_elements.map(element => disabledElement(element))
+      let submitter = document.createElement('button');
+      submitter.type = 'submit'
+      submitter.formAction = '/ingredients/new'
+      submitter.formMethod = 'get'
+      form.appendChild(submitter)
+      form.requestSubmit(submitter)
+    }
+  }
 }

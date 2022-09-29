@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     get 'recipes/edit', to: 'recipes#edit'
     post 'recipes', to: 'recipes#update'
   end
+  resources :ingredients, only: %i[new create]
   resources :recipes, only: %i[new]
 end

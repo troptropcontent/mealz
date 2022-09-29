@@ -1,0 +1,39 @@
+<%= render 'ui/page' do %>
+  <h2 class='text-center'>Créer un nouvel ingrédient</h2>
+  <%= form_with url: ingredients_path, class: 'flex flex-col' do |form| %>
+    <%= form.fields_for :ingredient, @ingredient  do |ingredient_fields| %>
+      <div class='flex flex-col'>
+        <%= ingredient_fields.label :name %>
+        <%= ingredient_fields.text_field :name, class: 'w-full' %>
+        <div class='h-6'>
+          <% if @ingredient.errors.include?(:name) %>
+                <% @ingredient.errors.full_messages_for(:name).each do |message| %>
+                    <p class='error_explanation'>* <%= message %></p>
+                <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class='flex flex-col'>
+        <%= ingredient_fields.label :unit %>
+        <%= ingredient_fields.select :unit, Ingredient.units.keys ,{ include_blank: true}, class: 'w-full' %>
+        <div class='h-6'>
+          <% if @ingredient.errors.include?(:unit) %>
+              <% @ingredient.errors.full_messages_for(:unit).each do |message| %>
+                  <p class='error_explanation'>* <%= message %></p>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= form.fields_for :course, @course  do |course_fields| %>
+      <%= course_fields.hidden_field :id %>
+      <% @recipes_from_previous_page.each_with_index do |recipe| %>
+        <%= course_fields.fields_for :recipes, recipe  do |recipe_fields| %>
+          <%= recipe_fields.hidden_field :ingredient_id %>
+          <%= recipe_fields.hidden_field :quantity %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= form.submit "Créer", class:"bg-sky-500 text-white py-2 w-full rounded-md" %>
+  <% end %>
+<% end %>

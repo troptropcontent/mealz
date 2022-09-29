@@ -9,6 +9,7 @@ class Ingredient < ApplicationRecord
   ]
 
   validates :name, uniqueness: true
+  validates :unit, :name, presence: true
 
   def self.new(args = {})
     args[:name] = args[:name].strip.downcase if args[:name]
