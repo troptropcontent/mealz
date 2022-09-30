@@ -35,6 +35,6 @@ class IngredientsController < ApplicationController
   end
 
   def ingredient_params
-    params.require(:ingredient).permit(:name, :unit)
+    params.require(:ingredient).permit(:name, :unit, :category)
   end
 end

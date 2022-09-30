@@ -1,9 +1,21 @@
 <div class="flex flex-col w-full">
-    <% @shopping_list.quantities.each do |ingredient_with_quantity| %>
-      <%= render(
-            'ui/simple_card', 
-            content: ingredient_with_quantity.name, 
-            subcontent: quantity_with_unit(ingredient_with_quantity)
-        )  %>
-    <% end %>
+    <form action="#">
+        <% @shopping_list.each do |category, ingredients_with_total_quantity| %>
+        <%= render 'ui/card' do %>
+            <h3 class='text-bold'><%= category %></h3>
+            <hr class='border-t-2 border-black mb-2'>
+            <% ingredients_with_total_quantity.each do |ingredient| %> 
+            <div class="flex">
+                <label for="done">
+                    <%= check_box_tag 'done' %> 
+                </label>
+                <div class='ml-2 flex justify-between grow'>
+                    <p><%= ingredient.name.capitalize %></p>
+                    <p><%= quantity_with_unit(ingredient) %></p>
+                </div>
+            </div>
+            <% end %>
+        <% end %>
+        <% end %>
+    </form>
 </div>
