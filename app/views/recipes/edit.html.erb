@@ -5,7 +5,7 @@
     </div>
         <%= form_with model: @course, url: course_recipes_path, method: :post,  class: 'flex flex-col justify-between grow border-2 border-slate-300 rounded-lg', data: {'controller': "recipes--edit--nested-form"} do |course_form| %>
             <div class='flex border-b-2 border-slate-300'>
-                <%= select(:fake, :ingredient_id, {}, {prompt: 'Ingredients'}, required: true, class: 'text-ellipsis w-1/5 grow rounded-tl-md border-none', data: {'recipes--edit--nested-form-target':"newRecipeIngredient", action: "recipes--edit--nested-form#detectNewIngredientAndRedirect"}) do %>
+                <%= select(:fake, :ingredient_id, {}, {prompt: 'Ingredients'}, class: 'text-ellipsis w-1/5 grow rounded-tl-md border-none', data: {'recipes--edit--nested-form-target':"newRecipeIngredient", action: "recipes--edit--nested-form#detectNewIngredientAndRedirect"}) do %>
                     <%= @available_ingredients.each do |ingredient| %>
                         <%= content_tag(:option, ingredient.name, value: ingredient.id, selected: @preselected_ingredient_id.to_i == ingredient.id,  data: { 'ingredient-unit': ingredient.unit }) %>
                     <% end %>
@@ -14,7 +14,7 @@
                 <template id="template" data-recipes--edit--nested-form-target="templateOption">
                     <%= content_tag(:option, 'INGREDIENT_NAME', value: 'INGREDIENT_ID', data: { 'ingredient-unit': 'INGREDIENT_UNIT' }) %>
                 </template>
-                <%= number_field :fake, :quantity, min: 0, class: 'w-20 border-none', required: true, placeholder: 'Quantité', data: {'recipes--edit--nested-form-target':"newRecipeQuantity"} %>
+                <%= number_field :fake, :quantity, min: 0, class: 'w-28 border-none placeholder-black', placeholder: 'Quantité', data: {'recipes--edit--nested-form-target':"newRecipeQuantity"} %>
                 <div>
                     <%= button_tag formaction: "#", class: 'bg-sky-500 w-10 flex flex-col justify-center items-center text-white h-full rounded-tr-md', data: {action: "recipes--edit--nested-form#addRecipe"} do %>
                         <%= inline_svg_tag 'icons/plus.svg' %>

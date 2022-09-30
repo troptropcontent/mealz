@@ -24,6 +24,17 @@
           <% end %>
         </div>
       </div>
+      <div class='flex flex-col'>
+        <%= ingredient_fields.label :category %>
+        <%= ingredient_fields.select :category, Ingredient.categories.keys ,{ include_blank: true}, class: 'w-full' %>
+        <div class='h-6'>
+          <% if @ingredient.errors.include?(:category) %>
+              <% @ingredient.errors.full_messages_for(:category).each do |message| %>
+                  <p class='error_explanation'>* <%= message %></p>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
     <%= form.fields_for :course, @course  do |course_fields| %>
       <%= course_fields.hidden_field :id %>
