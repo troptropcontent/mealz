@@ -39,3 +39,11 @@ h2 {
 h1 {
   @apply text-2xl;
 }
+
+input::placeholder {
+  @apply text-slate-400
+}
+
+select:invalid {
+  @apply text-slate-400
+}
